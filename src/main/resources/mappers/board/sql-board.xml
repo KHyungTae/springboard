@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.springboard.mapper.BoardServiceMapper">
+
+	<select id="getBoardList" parameterType="BoardVO" resultType="BoardVO">
+	/* boardMapper.getListBoard */
+	<![CDATA[
+		SELECT *
+		FROM (
+			SELECT 	ROWNUM AS RN
+					,BOARD_ID
+					,TITLE
+					,CONTENTS
+					,REGT_NM
+					,REGT_ID
+					,TO_CHAR(REGT_DATE,'YYYY.MM.DD') AS REGT_DATE
+					,UPDATE_NM
+					,UPDATE_ID
+					,TO_CHAR(UPDATE_DATE,'YYYY.MM.DD') AS UPDATE_DATE
+					,PARENT_ID
+					,DEPTH
+					,GROUP_ID
+					,ORDER_IN_GROUP
+			FROM SPRINGBOARD
+			WHERE 1 = 1
+	]]>
+	<if test="searchWord != null and searchWord != ''">
+		<if test="searchOption == 'title'">
+			AND	TITLE LIKE ('%'||#{searchWord}||'%')
+		</if>
+		<if test="searchOption == 'regt_nm'">
+			AND	REGT_NM LIKE ('%'||#{searchWord}||'%')
+		</if>
+	</if>
+	<![CDATA[
+			START WITH PARENT_ID = 0
+			CONNECT BY PRIOR BOARD_ID = PARENT_ID
+			ORDER SIBLINGS BY ORDER_IN_GROUP ASC, BOARD_ID DESC
+			)
+		WHERE RN BETWEEN #{startRow} AND #{endRow}
+	]]>
+	</select>
+	
+	
+	<select id="totalCountBoard" parameterType="BoardVO" resultType="int">
+	/* boardMapper.totalCountBoard */
+	<![CDATA[
+		SELECT COUNT(*) FROM SPRINGBOARD
+		WHERE 1 = 1
+	]]>
+		<if test="searchWord != null and searchWord != ''">
+			<if test="searchOption == 'title'">
+				AND	TITLE LIKE ('%'||#{searchWord}||'%')
+			</if>
+			<if test="searchOption == 'regt_nm'">
+				AND	REGT_NM LIKE ('%'||#{searchWord}||'%')
+			</if>
+		</if>
+	</select>
+	
+	
+	<select id="getBoardById" parameterType="BoardVO" resultType="BoardVO">
+	/* boardMapper.getBoardById */
+	<![CDATA[
+		SELECT	BOARD_ID
+				,TITLE
+				,CONTENTS
+				,REGT_NM
+				,REGT_ID
+				,TO_CHAR(REGT_DATE,'YYYY.MM.DD') AS REGT_DATE
+				,UPDATE_NM
+				,UPDATE_ID
+				,TO_CHAR(UPDATE_DATE,'YYYY.MM.DD') AS UPDATE_DATE
+				,PARENT_ID
+				,GROUP_ID
+				,DEPTH
+				,ORDER_IN_GROUP
+		FROM	SPRINGBOARD
+		WHERE	BOARD_ID = #{board_id}
+	]]>
+	</select>
+	
+	
+	<insert id="insertBoard" parameterType="BoardVO">
+	/* boardMapper.insertBoard */
+	<![CDATA[
+		INSERT INTO SPRINGBOARD
+		(
+			BOARD_ID
+			,TITLE
+			,CONTENTS
+			,REGT_NM
+			,REGT_ID
+			,REGT_DATE
+			,PARENT_ID
+			,GROUP_ID
+			,DEPTH
+			,ORDER_IN_GROUP
+		) VALUES (
+			#{board_id}
+			,#{title}
+			,#{contents}
+			,#{regt_nm}
+			,#{regt_id}
+			,SYSDATE
+			,#{parent_id}
+			,(SELECT COALESCE((SELECT GROUP_ID FROM SPRINGBOARD WHERE BOARD_ID = #{parent_id}),#{board_id})FROM DUAL)
+			,#{depth}
+			,(SELECT NVL(MAX(ORDER_IN_GROUP),0)+1 FROM SPRINGBOARD WHERE GROUP_ID = COALESCE((SELECT GROUP_ID FROM SPRINGBOARD WHERE BOARD_ID = #{parent_id}),#{board_id}))
+		)
+	]]>
+	</insert>
+	
+	
+	<update id="updateBoard" parameterType="BoardVO">
+	/* boardMapper.updateBoard */
+	<![CDATA[
+		UPDATE SPRINGBOARD SET
+			TITLE = #{title}
+			,CONTENTS = #{contents}
+			,UPDATE_NM = #{update_nm}
+			,UPDATE_ID = #{update_id}
+			,UPDATE_DATE = SYSDATE
+		WHERE 	BOARD_ID = #{board_id}
+	]]>
+	</update>
+	
+	
+	<delete id="deleteBoard" parameterType="BoardVO">
+	/* boardMapper.deleteBoard */
+	<![CDATA[
+		DELETE FROM SPRINGBOARD WHERE BOARD_ID = #{board_id}
+	]]>
+	</delete>
+
+	<select id="getMaxId" resultType="int">
+	/* boardMapper.getMaxId */
+	<![CDATA[
+		SELECT COALESCE(MAX(BOARD_ID),0) FROM SPRINGBOARD
+	]]>
+	</select>
+	
+	
+	<select id="getBoardByCommentId" parameterType="int" resultType="BoardVO">
+	/* boardMapper.getBoardByCommentId */
+	<![CDATA[
+		SELECT	BOARD_ID
+				,TITLE
+				,CONTENTS
+				,REGT_NM
+				,REGT_ID
+				,TO_CHAR(REGT_DATE,'YYYY.MM.DD') AS REGT_DATE
+				,UPDATE_NM
+				,UPDATE_ID
+				,TO_CHAR(UPDATE_DATE,'YYYY.MM.DD') AS UPDATE_DATE
+				,PARENT_ID
+				,GROUP_ID
+				,DEPTH
+				,ORDER_IN_GROUP
+		FROM	SPRINGBOARD
+		WHERE	BOARD_ID = #{board_id}
+	]]>
+	</select>
+</mapper>

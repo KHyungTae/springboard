@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+/* 기본적ㅇ니 폰트 및 박스 모델 초기화 */
+body, input, button {
+	font-family: Arial, sans-serif;
+	box-sizing: border-box;
+}
+
+header h1{
+	text-align: left;
+	padding: 20px;
+	background-color: #007bff;
+	color: white;
+	margin: 0;
+}
+
+/* 테이블 기본 스타일 */
+table{
+	width:100%;
+	border-collapse: collapse;
+	margin:20px 0;
+	border: 1px solid;
+}
+
+table, th, td{
+	border:1px solid #ddd;
+}
+
+th, td{
+	padding:12px;
+	text-align:letf;
+}
+
+table, tr, td{
+	text-align: center;
+}
+
+th{
+	background-color: #f4f4f4;
+	text-align:center;
+}
+
+td a{
+	color: #007bff;
+	text-decoration: none;
+}
+
+td a:hover{
+	text-decoration: underline;
+}
+
+.blueButton{
+	text-align:center;
+	margin-top: 10px 0;
+}
+
+/* button */
+.blueButton button{
+	float: right;
+	padding: 10px 20px;
+	margin-left: 10px;
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.3s ease-in-out;
+}
+
+.blueButton button:hover{
+	background-color: #0056b3;
+}
