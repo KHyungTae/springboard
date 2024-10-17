@@ -1,0 +1,72 @@
+@charset "UTF-8";
+
+/* 공통 부분 스타일 */
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #f8f9fa;
+}
+
+header h1{
+	text-align: left;
+	padding: 20px;
+	background-color: #007bff;
+	color: white;
+	margin: 0;
+}
+
+/* 게시글 상세 내용 스타일 */
+.form-container{
+	width: 100%;
+	margin: 20px auto;
+	background-color: white;
+	padding: 5px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+table, th, td{
+	border: 1px solid #ddd;
+}
+
+.form-container table{
+	width: 100%;
+	border-collapse: collapse;
+	border: 1px solid;
+}
+
+.form-container th, .form-container td{
+	padding: 10px;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+}
+
+.form-container th{
+	width:20%;
+	background-color: #f4f4f4;
+	text-align: center;
+}
+
+.blueButton{
+	text-align:center;
+	padding: 10px;
+	margin-top: 10px 0;
+}
+
+.blueButton button{
+	float: right;
+	padding:10px 20px;
+	margin-left: 5px;
+	font-size: 16px;
+	border: none;
+	border-radius: 4px;
+	background-color: #007bff;
+	color: white;
+	cursor: pointer;
+	transition: background-color 0.3s ease-in-out;
+}
+
+.blueButton button:hover{
+	background-color: #0056b3;
+}

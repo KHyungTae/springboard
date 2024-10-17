@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.springboard.mapper.FileServiceMapper">
+
+	<insert id="insertFileInfo" parameterType="FileVO">
+	/* fileMapper.insertFileInfo */
+		INSERT INTO SPRINGFILEUPLOAD (
+			FILE_ID
+			,BOARD_ID
+			,ORIGINAL_FILE_NM
+			,SAVE_FILE_NM
+			,FILE_SIZE
+			,FILE_TYPE
+			,IS_IMAGE
+			,UPLOAD_DATE
+			,THUMBNAILPATH
+		) VALUES (
+			#{file_id}
+			,#{board_id}
+			,#{original_file_nm}
+			,#{save_file_nm}
+			,#{file_size}
+			,#{file_type}
+			,#{is_image}
+			,SYSDATE
+			,#{thumbnailpath, jdbcType = VARCHAR}
+		)
+	</insert>
+	
+	
+	<select id="getMaxId" resultType="int">
+	/* fileMapper.getMaxId */
+	<![CDATA[
+		SELECT COALESCE(MAX(FILE_ID),0) FROM SPRINGFILEUPLOAD
+	]]>
+	</select>
+	
+	
+	<select id="selectFilesByBoardId" parameterType="FileVO" resultType="FileVO">
+	/* fileMapper.selectFilesByBoardId */
+		SELECT	FILE_ID
+				,BOARD_ID
+				,ORIGINAL_FILE_NM
+				,SAVE_FILE_NM
+				,FILE_SIZE
+				,FILE_TYPE
+				,IS_IMAGE
+				,UPLOAD_DATE
+				,THUMBNAILPATH
+		FROM	SPRINGFILEUPLOAD
+		WHERE	BOARD_ID = #{board_id}
+	</select>
+	
+	
+	<delete id="deleteFiles" parameterType="FileVO">
+	/* fileMapper.deleteFiles */
+		DELETE FROM SPRINGFILEUPLOAD WHERE board_id = #{board_id}
+	</delete>
+	
+	<delete id="deleteFile" parameterType="FileVO">
+	/* fileMapper.deleteFile */
+		DELETE FROM SPRINGFILEUPLOAD WHERE file_id = #{file_id}
+	</delete>
+</mapper>

@@ -1,0 +1,76 @@
+@charset "UTF-8";
+
+#comments-group{
+	margin-top: 20px;
+	width: 100%;
+}
+
+#comments-container2{
+	width: 100%;
+	padding-left: 10px;
+}
+
+#comments-container{
+	width: 100%;
+	padding-left: 10px;
+}
+
+.comment-insert{
+	margin-bottom: 10px;
+	padding: 30px;
+	background-color: #f9f9f9;
+	border-radius: 5px;
+	border: 1px solid #ddd;
+	position: relative;
+}
+
+.comment-insert button{
+	float: right;
+	padding:5px 10px;
+	margin-left: 10px;
+	font-size: 10px;
+	border: none;
+	border-radius: 4px;
+	background-color: #007bff;
+	color: white;
+	cursor: pointer;
+	transition: background-color 0.3s ease-in-out;
+}
+
+
+
+.comment-item{
+	margin-bottom: 10px;
+	padding: 10px;
+	background-color: #f9f9f9;
+	border-radius: 5px;
+	border: 1px solid #ddd;
+	position: relative;
+}
+
+.comment-item button{
+	float: right;
+	padding:5px 10px;
+	margin-left: 10px;
+	font-size: 10px;
+	border: none;
+	border-radius: 4px;
+	background-color: #007bff;
+	color: white;
+	cursor: pointer;
+	transition: background-color 0.3s ease-in-out;
+}
+
+.comment-item button:hover{
+	background-color: #0056b3;
+}
+
+#reply-form{
+	padding: 50px;
+	margin-top: 10px;
+	margin-left: 20px; /*부모댓글에 대한 들여쓰기*/
+}
+
+textarea{
+	width: 100%;
+}
