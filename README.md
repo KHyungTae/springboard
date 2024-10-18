@@ -12,24 +12,17 @@
   9. lombok
   10. 스마트에디터2 사용 (이미지 등록 가능, 2.8.2.3)
 ---
-
-ViewController (.jsp연결 화면)
-
-APIComtroller (ajax통신)
-
-Service (인터페이스)
-
-ServiceImpl (비즈니스로직)
-
-ServiceMapper (인터페이스)
-
-VO (데이터 저장)
-
-.xml (쿼리)
-
-.jsp (화면, JavaScript(Jquery))
-
-
+## 구성
+  1. ViewController (.jsp연결 화면)
+  2. APIComtroller (ajax통신)
+  3. Service (인터페이스)
+  4. ServiceImpl (비즈니스로직)
+  5. ServiceMapper (인터페이스)
+  6. VO (데이터 저장)
+  7. .xml (쿼리)
+  8. .jsp (화면, JavaScript(Jquery))
+---
+## 기능들
 1. 목록: 게시글 목록, 검색, 페이징, 답글에 답글 목록
 2. 등록: 게시글 등록, 답글 등록, 파일업로드 등록, 썸네일 생성 
 3. 상세: 상세 게시글, 파일다운로드
