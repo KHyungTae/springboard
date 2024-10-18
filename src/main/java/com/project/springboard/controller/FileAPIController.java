@@ -165,7 +165,7 @@ public class FileAPIController {
         }
     }
 	
-	//에디터 단일 이미지 업로드
+	//에디터 단일 사진첨부
 	/*@PostMapping("/photoUpload")
     public ResponseEntity<Void> multiplePhotoUpload(MultipartFile file, HttpServletRequest req, HttpServletResponse res) {
 		try {
