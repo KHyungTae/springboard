@@ -1,25 +1,17 @@
-게시판 혼자 만들어보기!
+# 게시판 혼자 만들어보기!
 
-STS4툴(sts-4.24.0.RELEASE)
-
-springboot 2.5.5 (Maven)
-
-외장 톰캣 9
-
-JDK 11
-
-Jquery-3.6.0
-
-.JSP(JSTL)
-
-.XML(Mybatis 2.2.0)
-
-Oracle(ojdbc6/11.2.0.4)
-
-lombok
-
-스마트에디터2 사용 (이미지 등록 가능, 2.8.2.3)
-
+## 개발환경
+  1. STS4툴(sts-4.24.0.RELEASE)
+  2. springboot 2.5.5 (Maven)
+  3. 외장 톰캣 9
+  4. JDK 11
+  5. Jquery-3.6.0
+  6. .JSP(JSTL)
+  7. .XML(Mybatis 2.2.0)
+  8. Oracle(ojdbc6/11.2.0.4)
+  9. lombok
+  10. 스마트에디터2 사용 (이미지 등록 가능, 2.8.2.3)
+---
 
 ViewController (.jsp연결 화면)
 
