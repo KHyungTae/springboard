@@ -31,6 +31,7 @@
 				<th style="align-content: center;">내용</th>
 				<td>
 					<textarea id="contents" name="contents" rows="10" cols="122"></textarea>
+					<p class="count"><span>0</span> / 4000자까지</p>
 				</td>
 			</tr>
 			<tr>
@@ -97,6 +98,23 @@
 			},
 			fCreator: "createSEditor2"
 		});
+		
+		setTimeout(function() {
+			var ctntarea = document.querySelector("iframe").contentWindow.document.querySelector("iframe").contentWindow.document.querySelector(".se2_inputarea");
+			ctntarea.addEventListener("keyup", function(e) {
+				var text = this.innerHTML;
+				text = text.replace(/<br>/ig, "");	// br 제거
+				text = text.replace(/&nbsp;/ig, "");// 공백 제거
+				text = text.replace(/<(\/)?([a-zA-Z]*)(\s[a-zA-Z]*=[^>]*)?(\s)*(\/)?>/ig, "");	// html 제거
+				
+				var len = text.length;
+				document.querySelector(".count span").innerHTML = len;
+				
+				if(len > 4000) {
+					alert("최대 4000 자까지 입력 가능합니다.");
+				}
+			});	
+		}, 1000)
 	}
 
 	//게시글 등록
@@ -157,14 +175,17 @@
 	
 	//게시글등록 검증
 	function validate() {
+		var content = $("#contents").val();
+		
 		if($("#title").val().trim() == '') {
 			alert("등록할 제목을 입력해주세요.");
 			$("#title").focus();
 			return false;
 		}
 		
-		if($("#contents").val().trim() == '') {
-			alert("등록할 내용을 입력해주세요.");
+		if(content == "" || content == null || content == '&nbsp;' || content == '<p>&nbsp;</p>') {
+			alert("등록할 내용을 작성하세요.");
+			oEditors.getById["contents"].exec("FOCUS");
 			return false;
 		}
 		

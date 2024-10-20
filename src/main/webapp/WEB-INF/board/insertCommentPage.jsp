@@ -31,6 +31,7 @@
 				<th style="align-content: center;">내용</th>
 				<td>
 					<textarea id="contents" name="contents" rows="10" cols="122"></textarea>
+					<p class="count"><span>0</span> / 4000자까지</p>
 				</td>
 			</tr>
 			<tr>
@@ -99,6 +100,23 @@
 			},
 			fCreator: "createSEditor2"
 		});
+		
+		setTimeout(function() {
+			var ctntarea = document.querySelector("iframe").contentWindow.document.querySelector("iframe").contentWindow.document.querySelector(".se2_inputarea");
+			ctntarea.addEventListener("keyup", function(e) {
+				var text = this.innerHTML;
+				text = text.replace(/<br>/ig, "");	// br 제거
+				text = text.replace(/&nbsp;/ig, "");// 공백 제거
+				text = text.replace(/<(\/)?([a-zA-Z]*)(\s[a-zA-Z]*=[^>]*)?(\s)*(\/)?>/ig, "");	// html 제거
+				
+				var len = text.length;
+				document.querySelector(".count span").innerHTML = len;
+				
+				if(len > 4000) {
+					alert("최대 4000 자까지 입력 가능합니다.");
+				}
+			});	
+		}, 1000)
 	}
 	
 	
@@ -160,25 +178,28 @@
 	
 	//답글등록 검증
 	function validate() {
+		var content = $("#contents").val();
+		
 		if($("#title").val().trim() == '') {
-			alert("제목을 입력해주세요.");
+			alert("답변 제목을 입력해주세요.");
 			$("#title").focus();
 			return false;
 		}
 		
-		if($("#contents").val().trim() == '') {
-			alert("내용을 입력해주세요.");
+		if(content == "" || content == null || content == '&nbsp;' || content == '<p>&nbsp;</p>') {
+			alert("답변 내용을 작성하세요.");
+			oEditors.getById["contents"].exec("FOCUS");
 			return false;
 		}
 		
 		if($("#regt_nm").val().trim() == '') {
-			alert("이름을 입력해주세요.");
+			alert("답변등록 이름을 입력해주세요.");
 			$("#regt_nm").focus();
 			return false;
 		}
 		
 		if($("#regt_id").val().trim() == '') {
-			alert("아이디를 입력해주세요.");
+			alert("답변등록 아이디를 입력해주세요.");
 			$("#regt_id").focus();
 			return false;
 		}
