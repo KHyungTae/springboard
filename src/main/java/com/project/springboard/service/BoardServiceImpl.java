@@ -14,6 +14,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.springboard.mapper.BoardServiceMapper;
@@ -25,6 +26,7 @@ import com.project.springboard.vo.PageVO;
 import net.coobird.thumbnailator.Thumbnails;
 
 @Service
+@Transactional(readOnly = true)
 public class BoardServiceImpl implements BoardService {
 	
 	@Autowired
@@ -110,6 +112,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	@Transactional
 	public void insertBoard(Map<String, Object> commentData, MultipartFile[] files) {
 		// TODO 게시글 등록(답글 등록 + 파일업로드)
 		BoardVO boardVO = new BoardVO();
@@ -228,6 +231,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	@Transactional
 	public void updateBoard(Map<String, Object> commentData, MultipartFile[] files) {
 		// TODO 게시글 수정(답글 수정)
 		BoardVO boardVO = new BoardVO();
@@ -314,6 +318,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	@Transactional
 	public void deleteBoard(BoardVO vo) {
 		// TODO 게시글 삭제(답글 삭제)
 		

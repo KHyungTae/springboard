@@ -23,6 +23,7 @@
 				<option value="">:: 선택 ::</option>
 				<option value="title">제목</option>
 				<option value="regt_nm">작성자</option>
+				<option value="update_nm">수정자</option>
 			</select>
 			<input type="text" id="searchWord" placeholder="검색어를 입력하세요">
 			<button id="searchButton">검색</button>

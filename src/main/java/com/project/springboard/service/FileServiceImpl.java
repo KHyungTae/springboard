@@ -8,11 +8,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.project.springboard.mapper.FileServiceMapper;
 import com.project.springboard.vo.FileVO;
 
 @Service
+@Transactional(readOnly = true)
 public class FileServiceImpl implements FileService {
 	
 	//파일이 저장될 디렉토리 경로(업로드)
@@ -24,6 +26,7 @@ public class FileServiceImpl implements FileService {
 	private FileServiceMapper fileServiceMapper;
 
 	@Override
+	@Transactional
 	public void deleteFile(FileVO vo) {
 		// TODO 파일 하나씩 삭제
 		
@@ -49,6 +52,7 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
+	@Transactional
 	public void saveFileInfo(FileVO fileVO) {
 		//파일 정보를 DB에 저장
 		fileServiceMapper.insertFileInfo(fileVO);		

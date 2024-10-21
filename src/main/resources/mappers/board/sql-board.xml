@@ -31,6 +31,9 @@
 		<if test="searchOption == 'regt_nm'">
 			AND	REGT_NM LIKE ('%'||#{searchWord}||'%')
 		</if>
+		<if test="searchOption == 'update_nm'">
+			AND	UPDATE_NM LIKE ('%'||#{searchWord}||'%')
+		</if>
 	</if>
 	<![CDATA[
 			START WITH PARENT_ID = 0
