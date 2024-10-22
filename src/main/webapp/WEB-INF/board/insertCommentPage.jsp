@@ -153,7 +153,7 @@
 				
 				console.log("formData: " + JSON.stringify(formData));
 				
-				//if(confirm("입력하신 내용을 등록하시겠습니까?")) {
+				if(confirm("입력하신 내용을 등록하시겠습니까?")) {
 				
 					$.ajax({
 						type: "POST",
@@ -169,7 +169,7 @@
 							alert("답글 등록에 실패했습니다. 에러" + xhr.status);
 						}
 					});
-				//}
+				}
 				
 			}
 			
