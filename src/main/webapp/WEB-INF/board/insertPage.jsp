@@ -123,11 +123,6 @@
 		$("#boardForm").submit(function(event) {
 			event.preventDefault();
 			
-			//등록확인 메시지 표시
-			if(!confirm("입력하신 내용을 등록하시겠습니까?")) {
-				return;
-			}
-			
 			//에디터 내용 동기화(에디터 내용을 textarea에 반영)
 			oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
 						
@@ -154,20 +149,23 @@
 				
 				console.log("formData: " + JSON.stringify(formData));
 				
-				$.ajax({
-					type: "POST",
-					url: "/api/springboard",
-					data: formData,
-					processData: false, //파일 데이터를 변환하지 않도록 설정 
-					contentType: false, //파일 업로드 시 반드시 false로 설정
-					success: function() {
-						alert("게시글이 등록되었습니다.");
-						window.location.href="/springboard/list";
-					},
-					error: function(xhr, status, error) {
-						alert("게시글 등록에 실패했습니다. 에러" + xhr.status);
-					}
-				});
+				if(confirm("입력하신 내용을 등록하시겠습니까?")) {
+				
+					$.ajax({
+						type: "POST",
+						url: "/api/springboard",
+						data: formData,
+						processData: false, //파일 데이터를 변환하지 않도록 설정 
+						contentType: false, //파일 업로드 시 반드시 false로 설정
+						success: function() {
+							alert("게시글이 등록되었습니다.");
+							window.location.href="/springboard/list";
+						},
+						error: function(xhr, status, error) {
+							alert("게시글 등록에 실패했습니다. 에러" + xhr.status);
+						}
+					});
+				}
 			}
 			
 		});

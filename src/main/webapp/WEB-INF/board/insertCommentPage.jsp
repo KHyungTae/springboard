@@ -128,11 +128,6 @@
 		$("#boardForm").submit(function(event) {
 			event.preventDefault();
 			
-			if(!confirm("입력하신 내용을 등록하시겠습니까?")) {
-				return;
-			}
-			
-			
 			oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
 			
 			
@@ -158,20 +153,23 @@
 				
 				console.log("formData: " + JSON.stringify(formData));
 				
-				$.ajax({
-					type: "POST",
-					url: "/api/springboard",
-					data: formData,
-					processData: false,
-					contentType: false,
-					success: function() {
-						alert("게시글이 등록되었습니다.");
-						window.location.href="/springboard/list";
-					},
-					error: function(xhr, status, error) {
-						alert("답글 등록에 실패했습니다. 에러" + xhr.status);
-					}
-				});
+				if(confirm("입력하신 내용을 등록하시겠습니까?")) {
+				
+					$.ajax({
+						type: "POST",
+						url: "/api/springboard",
+						data: formData,
+						processData: false,
+						contentType: false,
+						success: function() {
+							alert("게시글이 등록되었습니다.");
+							window.location.href="/springboard/list";
+						},
+						error: function(xhr, status, error) {
+							alert("답글 등록에 실패했습니다. 에러" + xhr.status);
+						}
+					});
+				}
 				
 			}
 			

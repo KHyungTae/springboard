@@ -221,11 +221,6 @@ a {
 		$("#boardForm").submit(function(event) {
 			event.preventDefault();
 			
-			//수정버튼 클릭시 메시지
-			if(!confirm("수정하신 내용을 등록하겠습니까?")) {
-				return;
-			}
-			
 			//에디터 내용 동기화(에디터 내용을 textarea에 반영)
 			oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);
 			
@@ -246,20 +241,23 @@ a {
 				
 				console.log("formData: " + JSON.stringify(formData));
 				
-				$.ajax({
-					type: "POST",
-					url: "/api/springboard/update",
-					data: formData,
-					processData: false,
-					contentType: false,
-					success: function() {
-						alert("게시글이 수정되었습니다.");
-						window.location.href="/springboard/list";
-					},
-					error: function(xhr, status, error) {
-						alert("게시글 수정에 실패했습니다. 에러:" + xhr.status);
-					}
-				});
+				if(confirm("수정하신 내용을 등록하겠습니까?")) {
+					
+					$.ajax({
+						type: "POST",
+						url: "/api/springboard/update",
+						data: formData,
+						processData: false,
+						contentType: false,
+						success: function() {
+							alert("게시글이 수정되었습니다.");
+							window.location.href="/springboard/list";
+						},
+						error: function(xhr, status, error) {
+							alert("게시글 수정에 실패했습니다. 에러:" + xhr.status);
+						}
+					});
+				}
 			}
 			
 		});
