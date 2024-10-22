@@ -241,7 +241,7 @@ a {
 				
 				console.log("formData: " + JSON.stringify(formData));
 				
-				if(confirm("수정하신 내용을 등록하겠습니까?")) {
+				//if(confirm("수정하신 내용을 등록하겠습니까?")) {
 					
 					$.ajax({
 						type: "POST",
@@ -257,7 +257,7 @@ a {
 							alert("게시글 수정에 실패했습니다. 에러:" + xhr.status);
 						}
 					});
-				}
+				//}
 			}
 			
 		});
