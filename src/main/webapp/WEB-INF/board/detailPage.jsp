@@ -239,8 +239,6 @@ a {
 					formData.append("fileUploads", fileInput.files[i]);
 				}
 				
-				console.log("formData: " + JSON.stringify(formData));
-				
 				if(confirm("수정하신 내용을 등록하겠습니까?")) {
 					
 					$.ajax({

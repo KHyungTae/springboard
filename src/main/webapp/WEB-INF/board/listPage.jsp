@@ -124,7 +124,7 @@
 			dataType: "JSON",
 			data: datas, //서버에 보낼 데이터.
 			success: function(res) {
-				console.log("res: " + JSON.stringify(res));
+
 				const list = res.resultList;
 				const pageInfo = res.pageInfo;
 				
@@ -198,11 +198,6 @@
 		//현재페이지 기준 시작페이지와 마지막페이지 계산.
 		let startPage = Math.max(currentPage - Math.floor(maxPages / 2), 1); //floor() 소수점 이하 버림.
 		let endPage = Math.min(startPage + maxPages - 1, totalPages);
-		
-		console.log("currentPage: " + JSON.stringify(currentPage));
-		console.log("totalPages: " + JSON.stringify(totalPages));
-		console.log("startPage: " + JSON.stringify(startPage));
-		console.log("endPage: " + JSON.stringify(endPage));
 		
 		//maxPages보다 작으면 1페이지 시작1, 2페이지 시작11, 3페이지 시작21 ...
 		if(endPage - startPage + 1 < maxPages) {
