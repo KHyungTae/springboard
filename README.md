@@ -21,6 +21,7 @@
   6. VO (데이터 저장)
   7. .xml (쿼리)
   8. .jsp (화면, JavaScript(Jquery))
+  9. 정적파일(css, .xml, .js, .properties 등) resources폴더에 있음.
 ---
 ## 기능들
   1. 목록: 게시글 목록(답글에 답글 목록), 검색(제목, 작성자), 페이징
