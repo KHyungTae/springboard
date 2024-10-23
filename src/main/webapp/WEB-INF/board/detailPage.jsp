@@ -293,7 +293,8 @@ a {
 				type: "POST",
 				url: "/api/file/delete",
 				contentType: "application/json",
-				data: JSON.stringify({"file_id":file_id}),
+				data: JSON.stringify({"file_id":file_id,
+										"board_id":board_id}),
 				success: function() {
 					alert("이미지/파일이 삭제되었습니다.");	
 					window.location.reload();

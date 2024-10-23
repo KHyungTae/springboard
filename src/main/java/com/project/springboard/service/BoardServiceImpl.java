@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +29,8 @@ import net.coobird.thumbnailator.Thumbnails;
 @Service
 @Transactional(readOnly = true)
 public class BoardServiceImpl implements BoardService {
+	
+	Logger logger = Logger.getLogger(this.getClass());
 	
 	@Autowired
 	private BoardServiceMapper mapper;
@@ -207,25 +210,27 @@ public class BoardServiceImpl implements BoardService {
 						}
 						
 						inputStream.close();
+						
+						fileVO = new FileVO();
+						
+						fileVO.setBoard_id(boardVO.getBoard_id());	//게시판ID
+						fileVO.setOriginal_file_nm(file.getOriginalFilename()); //원본파일명
+						fileVO.setSave_file_nm(saveName);	//저장될 파일명
+						fileVO.setFile_size(file.getSize());	//파일크기
+						fileVO.setFile_type(file.getContentType()); //파일타입
+						fileVO.setIs_image(file.getContentType().startsWith("image") ? "Y" : "N"); //이미지여부
+						/* 이미지가 아닌경우 null값때문에 쿼리부분에서 JdbcType=VARCHAR를 넣어주니 null값이 들어감. */
+						fileVO.setThumbnailpath(thumbnailPath); //썸네일 이미지 경로	
+						
+						Integer maxFileSeq = fileMapper.getMaxId();
+						fileVO.setFile_id(maxFileSeq + 1);
+						service.saveFileInfo(fileVO);
+						
 					} catch (Exception e) {
 						e.printStackTrace();
+						logger.error(e.getMessage(), e);
 					}
 				}
-				
-				fileVO = new FileVO();
-				
-				fileVO.setBoard_id(boardVO.getBoard_id());	//게시판ID
-				fileVO.setOriginal_file_nm(file.getOriginalFilename()); //원본파일명
-				fileVO.setSave_file_nm(saveName);	//저장될 파일명
-				fileVO.setFile_size(file.getSize());	//파일크기
-				fileVO.setFile_type(file.getContentType()); //파일타입
-				fileVO.setIs_image(file.getContentType().startsWith("image") ? "Y" : "N"); //이미지여부
-				/* 이미지가 아닌경우 null값때문에 쿼리부분에서 JdbcType=VARCHAR를 넣어주니 null값이 들어감. */
-				fileVO.setThumbnailpath(thumbnailPath); //썸네일 이미지 경로	
-				
-				Integer maxFileSeq = fileMapper.getMaxId();
-				fileVO.setFile_id(maxFileSeq + 1);
-				service.saveFileInfo(fileVO);
 			}
 		}
 	}
@@ -294,25 +299,27 @@ public class BoardServiceImpl implements BoardService {
 						}
 						
 						inputStream.close();
+						
+						fileVO = new FileVO();
+						
+						fileVO.setBoard_id(boardVO.getBoard_id());	//게시판ID
+						fileVO.setOriginal_file_nm(file.getOriginalFilename()); //원본파일명
+						fileVO.setSave_file_nm(saveName);	//저장될 파일명
+						fileVO.setFile_size(file.getSize());	//파일크기
+						fileVO.setFile_type(file.getContentType()); //파일타입
+						fileVO.setIs_image(file.getContentType().startsWith("image") ? "Y" : "N"); //이미지여부
+						/* 이미지가 아닌경우 null값때문에 쿼리부분에서 JdbcType=VARCHAR를 넣어주니 null값이 들어감. */
+						fileVO.setThumbnailpath(thumbnailPath); //썸네일 이미지 경로	
+						
+						Integer maxFileSeq = fileMapper.getMaxId();
+						fileVO.setFile_id(maxFileSeq + 1);
+						service.saveFileInfo(fileVO);
+						
 					} catch (Exception e) {
 						e.printStackTrace();
+						logger.error(e.getMessage(), e);
 					}
 				}
-				
-				fileVO = new FileVO();
-				
-				fileVO.setBoard_id(boardVO.getBoard_id());	//게시판ID
-				fileVO.setOriginal_file_nm(file.getOriginalFilename()); //원본파일명
-				fileVO.setSave_file_nm(saveName);	//저장될 파일명
-				fileVO.setFile_size(file.getSize());	//파일크기
-				fileVO.setFile_type(file.getContentType()); //파일타입
-				fileVO.setIs_image(file.getContentType().startsWith("image") ? "Y" : "N"); //이미지여부
-				/* 이미지가 아닌경우 null값때문에 쿼리부분에서 JdbcType=VARCHAR를 넣어주니 null값이 들어감. */
-				fileVO.setThumbnailpath(thumbnailPath); //썸네일 이미지 경로	
-				
-				Integer maxFileSeq = fileMapper.getMaxId();
-				fileVO.setFile_id(maxFileSeq + 1);
-				service.saveFileInfo(fileVO);
 			}
 		}
 	}
@@ -337,13 +344,14 @@ public class BoardServiceImpl implements BoardService {
 					Path thumbnailPath = Paths.get(thumbnailDir, fileInfo.getThumbnailpath());
 					Files.deleteIfExists(thumbnailPath);
 				}
+				
+				fileMapper.deleteFiles(vo.getBoard_id()); //파일정보삭제
+				mapper.deleteBoard(vo.getBoard_id());	//게시글정보삭제
+				
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				logger.error(e.getMessage(), e);
 			}
 		}
-		
-		fileMapper.deleteFiles(vo.getBoard_id()); //파일정보삭제
-		mapper.deleteBoard(vo.getBoard_id());	//게시글정보삭제
 	}
 }

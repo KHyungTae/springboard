@@ -1,11 +1,11 @@
 package com.project.springboard.service;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +16,8 @@ import com.project.springboard.vo.FileVO;
 @Service
 @Transactional(readOnly = true)
 public class FileServiceImpl implements FileService {
+	
+	Logger logger = Logger.getLogger(this.getClass());
 	
 	//파일이 저장될 디렉토리 경로(업로드)
 	private final String uploadDir = "C:/mine/fileDir";
@@ -31,7 +33,7 @@ public class FileServiceImpl implements FileService {
 		// TODO 파일 하나씩 삭제
 		
 		//file_id로 관련된 파일정보
-		List<FileVO> fileVO = fileServiceMapper.selectFilesByBoardId(vo.getFile_id());
+		List<FileVO> fileVO = fileServiceMapper.selectFilesByBoardId(vo.getBoard_id());
 		//파일 삭제
 		for(FileVO fileInfo : fileVO) {
 			try {
@@ -44,11 +46,13 @@ public class FileServiceImpl implements FileService {
 					Path thumbnailPath = Paths.get(thumbnailDir, fileInfo.getThumbnailpath());
 					Files.deleteIfExists(thumbnailPath);
 				}
-			} catch(IOException e) {
+				
+				fileServiceMapper.deleteFile(vo.getFile_id()); //파일정보삭제
+			} catch(Exception e) {
 				e.printStackTrace();
+				logger.error(e.getMessage(), e);
 			}
 		}
-		fileServiceMapper.deleteFile(vo.getFile_id()); //파일정보삭제
 	}
 
 	@Override
