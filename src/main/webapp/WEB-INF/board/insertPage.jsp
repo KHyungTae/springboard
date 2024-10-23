@@ -144,7 +144,7 @@
 				let fileInput = document.getElementById("fileUpload");
 				//let fileInput = $("input[name=fileUpload]");
 				for(let i = 0; i < fileInput.files.length; i++) {
-					formData.append("files", fileInput.files[i]);
+					formData.append("fileUploads", fileInput.files[i]);
 				}
 				
 				console.log("formData: " + JSON.stringify(formData));

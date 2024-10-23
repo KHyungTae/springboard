@@ -55,7 +55,7 @@ public class BoardAPIController {
 	 */
 	@PostMapping	//required=false 해당 필드가 쿼리스트링에 존재하지 않아도 예외가 발생하지 않는다고 한다
 	public ResponseEntity<Void> insertBoard(@RequestParam Map<String, Object> commentData,
-							@RequestParam(value = "files", required=false) MultipartFile[] files) {
+							@RequestParam(value = "fileUploads", required=false) MultipartFile[] files) {
 		service.insertBoard(commentData, files);
 		//201(작성됨) 성공적으로 요청되었으며 서버가 새 리소스를 작성했다.
 		return new ResponseEntity<>(HttpStatus.CREATED);
@@ -68,7 +68,7 @@ public class BoardAPIController {
 	 */
 	@PostMapping("/update")
 	public ResponseEntity<Void> updateBoard(@RequestParam Map<String, Object> commentData,
-							@RequestParam(value = "files", required=false) MultipartFile[] files) {
+							@RequestParam(value = "fileUploads", required=false) MultipartFile[] files) {
 		service.updateBoard(commentData, files);
 		//200(성공) 서버가 요청을 제대로 처리했다
 		return new ResponseEntity<>(HttpStatus.OK);
