@@ -5,13 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>답글 등록 페이지</title>
+<!-- script -->
 <script src="/js/jquery-3.6.0.min.js"></script>
+<!-- css -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link href="/css/form_container.css" rel="stylesheet">
 <!-- 스마트에디터2 -->
 <link rel="stylesheet" href="/smarteditor2/css/smart_editor2.css" type="text/css">
-<link href="/css/form_container.css" rel="stylesheet">
 <script type="text/javascript" src="/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>
-<!--<script type="text/javascript" src="/smarteditor2/js/service/SE2BasicCreator.js" charset="utf-8"></script>-->
 </head>
 <body>
 	<div class="container">
@@ -133,6 +134,7 @@
 			
 			if(validate()) {
 				
+				//int값으로 변환
 				//const boardId = parseInt(board_id, 10);
 				
 				let formData = new FormData();

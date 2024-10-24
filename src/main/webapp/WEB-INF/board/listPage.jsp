@@ -6,8 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글(답글) 목록</title>
-<!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+<!-- script -->
 <script src="/js/jquery-3.6.0.min.js"></script>
+<!-- css -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <link href="/css/pagination.css" rel="stylesheet">
 <link href="/css/list_page.css" rel="stylesheet">
@@ -100,11 +101,11 @@
 		setPagination();
 	});
 		
-	//URL의 page 파라미터값을 읽어옴. 못읽어오면 기본값 1
-	//function getPageUrl() {
-		//let params = new URLSearchParams(window.location.search);
-		//return parseInt(params.get('page')) || 1;
-	//}
+	/*URL의 page 파라미터값을 읽어옴. 못읽어오면 기본값 1
+	function getPageUrl() {
+		let params = new URLSearchParams(window.location.search);
+		return parseInt(params.get('page')) || 1;
+	}*/
 	
 	function setPageList(page) {
 		

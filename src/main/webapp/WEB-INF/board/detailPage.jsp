@@ -5,15 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글(답글) 상세/수정/삭제/댓글</title>
-<!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+<!-- script -->
 <script src="/js/jquery-3.6.0.min.js"></script>
+<!-- css -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<!-- 스마트에디터2 -->
-<link rel="stylesheet" href="/smarteditor2/css/smart_editor2.css" type="text/css">
 <link href="/css/form_container.css" rel="stylesheet">
 <link href="/css/comment_group.css" rel="stylesheet">
+<!-- 스마트에디터2 -->
+<link rel="stylesheet" href="/smarteditor2/css/smart_editor2.css" type="text/css">
 <script type="text/javascript" src="/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>
-<!--<script type="text/javascript" src="/smarteditor2/js/service/SE2BasicCreator.js" charset="utf-8"></script>-->
 <style>
 a {
 	text-decoration: none;
@@ -264,23 +264,22 @@ a {
 	//전체삭제(게시글, 파일)
 	function setPageDelete() {
 		$("#delete").click(function() {
-			if(!confirm("게시글을 삭제하시겠습니까?")) {
-				return;
-			}
 			
-			$.ajax({
-				type: "POST",
-				url: "/api/springboard/delete",
-				contentType: "application/json",
-				data: JSON.stringify({"board_id":board_id}),
-				success: function() {
-					alert("게시글이 삭제되었습니다.");
-					window.location.href="/springboard/list";
-				},
-				error: function(xhr, status, error) {
-					alert("게시글 삭제 중 오류가 발생하였습니다. 에러:" + xhr.status);
-				}
-			});
+			if(confirm("게시글을 삭제하시겠습니까?")) {
+				$.ajax({
+					type: "POST",
+					url: "/api/springboard/delete",
+					contentType: "application/json",
+					data: JSON.stringify({"board_id":board_id}),
+					success: function() {
+						alert("게시글이 삭제되었습니다.");
+						window.location.href="/springboard/list";
+					},
+					error: function(xhr, status, error) {
+						alert("게시글 삭제 중 오류가 발생하였습니다. 에러:" + xhr.status);
+					}
+				});
+			}
 		});	
 	}
 	
@@ -289,20 +288,21 @@ a {
 		$(document).on("click", ".fileDelete", function() {
 			let file_id = $(this).parent("div").attr("file_id");
 			
-			$.ajax({
-				type: "POST",
-				url: "/api/file/delete",
-				contentType: "application/json",
-				data: JSON.stringify({"file_id":file_id,
-										"board_id":board_id}),
-				success: function() {
-					alert("이미지/파일이 삭제되었습니다.");	
-					window.location.reload();
-				},
-				error: function(xhr, status, error) {
-					alert("이미지/파일이 삭제 중 오류가 발생하였습니다. 에러:" + xhr.status);
-				}
-			});
+			if(confirm("파일/이미지를 삭제하시겠습니까?")) {
+				$.ajax({
+					type: "POST",
+					url: "/api/file/delete",
+					contentType: "application/json",
+					data: JSON.stringify({"file_id":file_id}),
+					success: function() {
+						alert("이미지/파일이 삭제되었습니다.");	
+						window.location.reload();
+					},
+					error: function(xhr, status, error) {
+						alert("이미지/파일이 삭제 중 오류가 발생하였습니다. 에러:" + xhr.status);
+					}
+				});
+			}
 		});
 	}
 	

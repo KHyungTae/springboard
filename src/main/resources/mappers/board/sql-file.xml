@@ -51,6 +51,21 @@
 		WHERE	BOARD_ID = #{board_id}
 	</select>
 	
+	<select id="selectFileByFileId" parameterType="FileVO" resultType="FileVO">
+	/* fileMapper.selectFilesByBoardId */
+		SELECT	FILE_ID
+				,BOARD_ID
+				,ORIGINAL_FILE_NM
+				,SAVE_FILE_NM
+				,FILE_SIZE
+				,FILE_TYPE
+				,IS_IMAGE
+				,UPLOAD_DATE
+				,THUMBNAILPATH
+		FROM	SPRINGFILEUPLOAD
+		WHERE	FILE_ID = #{file_id}
+	</select>
+	
 	
 	<delete id="deleteFiles" parameterType="FileVO">
 	/* fileMapper.deleteFiles */

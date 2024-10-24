@@ -11,7 +11,9 @@ public interface FileServiceMapper {
 
 	void insertFileInfo(FileVO fileVO); //파일 업로드
 
-	List<FileVO> selectFilesByBoardId(int board_id); //파일정보
+	List<FileVO> selectFilesByBoardId(int board_id); //게시글 모든 파일정보
+	
+	List<FileVO> selectFileByFileId(int file_id); //파일정보
 	
 	Integer getMaxId(); //가장 큰 seq값을 가져옴 (Impl에서 가장큰값에 +1을 더해 순번이 순차적으로 등록되게함.)
 	

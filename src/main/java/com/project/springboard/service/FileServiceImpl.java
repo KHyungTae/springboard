@@ -33,7 +33,7 @@ public class FileServiceImpl implements FileService {
 		// TODO 파일 하나씩 삭제
 		
 		//file_id로 관련된 파일정보
-		List<FileVO> fileVO = fileServiceMapper.selectFilesByBoardId(vo.getBoard_id());
+		List<FileVO> fileVO = fileServiceMapper.selectFileByFileId(vo.getFile_id());
 		//파일 삭제
 		for(FileVO fileInfo : fileVO) {
 			try {
