@@ -166,8 +166,7 @@
 				
 				$(".table > tbody").html(htmls);
 				
-				//페이징 설정.
-				//setPagination();
+				//페이징 설정(공통처리).
 				kht.pagination.setData(currentPage, totalPages);
 				
 				//현재 페이지를 url에 반영하기.
