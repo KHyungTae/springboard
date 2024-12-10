@@ -83,7 +83,7 @@
 		//페이지 클릭시
 		$("#pagination").on("click", ".page-link", function(event) {
 			event.preventDefault();
-			const page = $(this).attr("data-page");
+			let page = $(this).attr("data-page");
 			if(page && page != currentPage) {
 				setPageList(page); //클릭한 페이지
 			}
@@ -113,7 +113,7 @@
 		//페이지 값이 문자열로 들어가 계속 더하기가 돼서 페이지가 안떠서 정수로 반환해줌.
 		page = parseInt(page, 10);
 		
-		const datas = {
+		let datas = {
 			"page": page,
 			"searchWord": $("#searchWord").val(),
 			"searchOption": $("#searchOption").val()
@@ -126,12 +126,12 @@
 			data: datas, //서버에 보낼 데이터.
 			success: function(res) {
 
-				const list = res.resultList;
-				const pageInfo = res.pageInfo;
+				let list = res.resultList;
+				let pageInfo = res.pageInfo;
 				
 				totalPages = pageInfo.totalPages; //총 페이지 수
 				currentPage = page; //현재 페이지 초기화
-				const totalItems = pageInfo.totalItems; //총 게시글 수
+				let totalItems = pageInfo.totalItems; //총 게시글 수
 				let htmls = '';
 				
 				//게시글 리스트 ((result.total_count)-(result.rn)+1)

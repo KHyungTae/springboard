@@ -4,7 +4,7 @@ kht.pagination = {
 	setData: function(currentPage, totalPages) {
 		let htmls = '';
 		
-		const maxPages = 10; //한번에 표시할 최대 페이지 번호 수
+		let maxPages = 10; //한번에 표시할 최대 페이지 번호 수
 		//현재페이지 기준 시작페이지와 마지막페이지 계산.
 		let startPage = Math.max(currentPage - Math.floor(maxPages / 2), 1); //floor() 소수점 이하 버림.
 		let endPage = Math.min(startPage + maxPages - 1, totalPages);

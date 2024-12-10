@@ -135,7 +135,7 @@
 			if(validate()) {
 				
 				//int값으로 변환
-				//const boardId = parseInt(board_id, 10);
+				//let boardId = parseInt(board_id, 10);
 				
 				let formData = new FormData();
 				

@@ -125,8 +125,8 @@ a {
 			data: {"board_id": board_id},
 			success: function(res) {
 				
-				const view = res.board;
-				const fileImage = res.files;
+				let view = res.board;
+				let fileImage = res.files;
 				
 				$("#board_id").text(view.board_id);
 				$("#title").val(view.title);

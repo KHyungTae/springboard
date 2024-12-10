@@ -129,8 +129,8 @@
 						
 			if(validate()) {
 				
-				const parentId = 0;
-				const boardId = 0;
+				let parentId = 0;
+				let boardId = 0;
 				
 				let formData = new FormData();
 				
